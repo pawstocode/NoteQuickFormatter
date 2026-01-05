@@ -65,7 +65,7 @@ namespace NoteQuickFormatter
         public void QuickAddNextMonthSectionButtonClicked(IRibbonControl control)
         {
             try
-            { 
+            {
                 OneNoteService oneNoteService = new OneNoteService();
                 oneNoteService.CreateNewSection(true);
             }
@@ -82,7 +82,10 @@ namespace NoteQuickFormatter
                 OneNoteService oneNoteService = new OneNoteService();
                 oneNoteService.CreateNewSection(false);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
         }
     }
 }
