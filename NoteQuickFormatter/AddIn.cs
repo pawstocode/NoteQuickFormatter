@@ -55,25 +55,34 @@ namespace NoteQuickFormatter
         }
 
         // 參考NoteHighlight2016寫法
-        public void AddNewSectionButtonClicked(IRibbonControl control)
+        public void AddNextMonthSectionButtonClicked(IRibbonControl control)
         {
             Thread t = new Thread(new ThreadStart(() => System.Windows.Forms.Application.Run(new NextMonthToDoTemplateDialog())));
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
-        public void QuickAddNewSectionButtonClicked(IRibbonControl control)
+        public void QuickAddNextMonthSectionButtonClicked(IRibbonControl control)
         {
             try
             { 
                 OneNoteService oneNoteService = new OneNoteService();
-                oneNoteService.CreateNewSection();
+                oneNoteService.CreateNewSection(true);
             }
             catch (Exception ex)
             {
                 /* TODO */
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
+        }
+        public void QuickAddCurrentMonthSectionButtonClicked(IRibbonControl control)
+        {
+            try
+            {
+                OneNoteService oneNoteService = new OneNoteService();
+                oneNoteService.CreateNewSection(false);
+            }
+            catch { }
         }
     }
 }

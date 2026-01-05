@@ -4,8 +4,9 @@
     <tabs>
       <tab idMso="TabInsert">
         <group id="addNewSection" label="模板">
-          <button id="buttonAdd" label="次月待辦事項" size="normal" screentip="新增新的一節，並在其中加入下個月的每週待辦事項模板。" onAction="AddNewSectionButtonClicked"/>
-          <button id="buttonQuickAdd" label="次月待辦事項 (Quick)" size="normal" screentip="快速新增節，插入待辦事項模板。" onAction="QuickAddNewSectionButtonClicked"/>
+          <button id="buttonNextMonthAdd" label="次月待辦事項" size="normal" screentip="新增新的一節，並在其中加入下個月的每週待辦事項模板。" onAction="AddNextMonthSectionButtonClicked"/>
+          <button id="buttonQuickNextMonthAdd" label="次月待辦事項 (Quick)" size="normal" screentip="快速新增節，插入待辦事項模板。" onAction="QuickAddNextMonthSectionButtonClicked"/>
+          <button id="buttonQuickCurrentMonthAdd" label="本月待辦事項 (Quick)" size="normal" screentip="快速新增節，插入待辦事項模板。" onAction="QuickAddCurrentMonthSectionButtonClicked"/>
         </group>
       </tab>
     </tabs>

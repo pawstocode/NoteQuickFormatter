@@ -34,7 +34,7 @@ namespace NoteQuickFormatter
         {
             try
             {
-                _oneNoteService.CreateNewSection(textBox1.Text, comboBox1.Text);
+                _oneNoteService.CreateNewSection(textBox1.Text, comboBox1.Text, true);
                 Close();
             }
             catch (Exception ex)

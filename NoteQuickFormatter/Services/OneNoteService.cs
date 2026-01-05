@@ -106,14 +106,17 @@ namespace NoteQuickFormatter
             }
             return outline;
         }
-        public void CreateNewSection()
+        public void CreateNewSection(bool addOneMonth = false)
         {
-            CreateNewSection(new DateTimeHelper().AbbreviatedMonthNames[DateTime.Now.Month % 12], _currentlyViewedNotebook);
+            string[] abbreviations = new DateTimeHelper().AbbreviatedMonthNames;
+            int month = DateTime.Now.Month;
+            string sectionName = addOneMonth ? abbreviations[month % 12] : abbreviations[month - 1];
+            CreateNewSectionElement(sectionName, _currentlyViewedNotebook, addOneMonth);
         }
-        public void CreateNewSection(string name, string notebookName)
+        public void CreateNewSection(string name, string notebookName, bool addOneMonth)
         {
             var notebook = GetNotebookByNickname(notebookName);
-            CreateNewSection(name, notebook);
+            CreateNewSectionElement(name, notebook, addOneMonth);
         }
 
         public XElement GetNotebookByNickname(string nickname)
@@ -121,10 +124,10 @@ namespace NoteQuickFormatter
             XElement notebook = _doc.Descendants(_ns + "Notebook").FirstOrDefault(nb => nb.Attribute("nickname").Value == nickname);
             return notebook;
         }
-        public void CreateNewSection(string name, XElement notebook)
+        public void CreateNewSectionElement(string name, XElement notebook, bool addOneMonth)
         {
             RefreshHierarchy();
-            DateTime day = DateTime.Today.AddMonths(1);
+            DateTime day = addOneMonth ? DateTime.Today.AddMonths(1) : DateTime.Now;
             var pageTitles = DateTimeHelper.GetWeekdayRanges(day.Year, day.Month);
             XElement section = new XElement(_ns + "Section",
                 new XAttribute("name", name));
@@ -176,7 +179,7 @@ namespace NoteQuickFormatter
             catch (Exception ex)
             { }
         }
-
+        
         public string GetPageContent(string id)
         {
             _oneNote.GetPageContent(id, out string xml);
